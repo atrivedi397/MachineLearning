@@ -1,0 +1,4 @@
+.idea/
+venv/
+testFile*.py
+__pycache__/
