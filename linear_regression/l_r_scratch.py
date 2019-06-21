@@ -3,7 +3,6 @@ Is there a relationship between the daily minimum and maximum temperature?
 Can you predict the maximum temperature given the minimum temperature?
 """""
 
-import csv
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -91,6 +90,9 @@ print(f"The correctness of the model is {percentage_of_accuracy}%")
 if __name__ == "__main__":
     dates = data["Date"]
     print(type(dates))
+    max_temp = data["MaxTemp"]
+    min_temp = data["MinTemp"]
+    min_temp_list, max_temp = list(min_temp), list(max_temp)
     date_list = list(dates)
     print("This model predicts the maximum temperature of the day for a given minimum temperature")
     start_date, end_date = "1942-7-1", "1945-12-31"
@@ -98,10 +100,11 @@ if __name__ == "__main__":
                        "predicted value and actual value in format (yyyy-mm-dd)")
 
     if input_date in date_list:
-        actual_max = dates[input_date].get("MaxTemp")
-        actual_min = dates[input_date].get("MinTemp")
-        print(f"The value of the Minimum temp is {actual_min}")
-        print(f"The actual value of the max temp is {actual_max}")
-        print(f"The predicted value of the max temp is {slope*actual_min + intercept}")
+        index_of_date = date_list.index(input_date)
+        min_temperature = min_temp_list.__getitem__(index_of_date)
+        print(f"The actual value of the max temp is {max_temp[index_of_date]}")
+        print(f"The predicted value of the max temp is {slope*min_temperature + intercept}")
+        print(f"The difference between predicted and actual value is "
+              f"{(slope*min_temperature + intercept)-max_temp[index_of_date]}")
     else:
         print("You have entered an invalid or out of range date")
