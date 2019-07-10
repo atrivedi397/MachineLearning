@@ -1,6 +1,6 @@
 # imported for some built in data sets
 from sklearn import datasets
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
 # for the training of model
 from sklearn.model_selection import train_test_split
@@ -20,9 +20,11 @@ petals_panda = pd.read_csv("/run/media/atrivedi/Drive 1 (NTFS)/Machine-Learning/
 
 # built in data sets
 petals = datasets.load_iris()
+print(petals.DESCR)
 print("Features : ", petals.feature_names)
 print("Target classes : ", petals.target_names)
 print(petals.data)
+
 print(petals.data.shape)
 print(petals.target)
 print(len(petals.target))
@@ -44,4 +46,4 @@ print(classification_report(y_test, y_pred))
 sns.pairplot(data=petals_panda, hue='species', palette='Set1')
 plt.show()
 
-
+print("Accuracy of the model : ", accuracy_score(y_pred=y_pred, y_true=y_test))
